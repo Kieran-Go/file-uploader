@@ -14,8 +14,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Session {
+  id         String   @id @default(cuid())
+  sid        String   @unique
+  data       String
+  expiresAt  DateTime
+
+  @@map("sessions") // Optional: map to a specific DB table name
+}
+
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  name     String
+  password String
+
+  @@map("users") // maps model to `users` table
 }
