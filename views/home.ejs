@@ -10,6 +10,31 @@
     <% if(currentUser) { %>
         <p>Welcome, <%= currentUser.name %></p>
         <a href="/log-out"><button>Log out</button></a>
+
+        <p>Add new folder?</p>
+        <form action="new-folder" method="POST">
+            <label for="folder-name">Name:</label>
+            <input type="text" id="folder-name" name="folder-name">
+            <button type="submit">Add</button>
+        </form>
+
+        <h3>Folders:</h3>
+        <% if (folders.length === 0) { %>
+            <p>No folders yet.</p>
+        <% } else { %>
+            <ul>
+                <% folders.forEach(folder => { %>
+                    <li>
+                        <div class="folder" style="display: flex; justify-content: space-between; max-width: 200px; 
+                        border: solid black 1px; padding: 10px;">
+                            <a href="/folder/<%= folder.id %>"><%= folder.name %></a>
+                            <a href="/delete-folder/<%= folder.id %>" style="color: red">X</a>
+                        </div>
+                    </li><br>
+                <% }); %>
+            </ul>
+        <% } %>
+
     <%} else { %>
         <p>You are not logged in.</p>
         <a href="/log-in"><button>Log in</button></a>

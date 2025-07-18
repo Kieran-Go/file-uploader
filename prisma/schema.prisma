@@ -28,6 +28,32 @@ model User {
   email    String @unique
   name     String
   password String
+  folders  Folder[]
 
-  @@map("users") // maps model to `users` table
+  @@map("users")
+}
+
+model Folder {
+  id      Int     @id @default(autoincrement())
+  name    String
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int     @map("user_id")
+  files   File[]
+
+  @@map("folders")
+}
+
+
+model File {
+  id           Int      @id @default(autoincrement())
+  originalName String
+  storedName   String
+  path         String
+  size         Int
+  uploadedAt   DateTime @default(now())
+
+  folder       Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  folderId     Int      @map("folder_id")   
+
+  @@map("files")
 }

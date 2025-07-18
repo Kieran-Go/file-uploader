@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader - <%= file.originalName %></title>
+</head>
+<body>
+    <h1><%= file.originalName %></h1>
+    <ul>
+        <li>Size: <%= file.size %></li>
+        <li>Uploaded at: <%= file.uploadedAt %></li>
+    </ul>
+
+    <a href="<%= file.path %>" download>
+        <button>Download</button>
+    </a>
+
+</body>
+</html>

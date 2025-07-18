@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader - <%= folder.name %> Files</title>
+</head>
+<body>
+    <h1> All Files in: <%= folder.name %></h1>
+    <form action="/upload-file/<%= folder.id %>" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required />
+        <button type="submit">Upload</button>
+    </form>
+
+    <% if (files.length === 0) { %>
+            <p>No files yet.</p>
+        <% } else { %>
+            <ul>
+                <% files.forEach(file => { %>
+                    <li>
+                        <div class="file" style="display: flex; justify-content: space-between; max-width: 200px; 
+                        border: solid black 1px; padding: 10px;">
+                            <a href="/file/<%= file.id %>"><%= file.originalName %></a>
+                            <a href="/delete-file/<%= file.id %>" style="color: red">X</a>
+                        </div>
+                    </li><br>
+                <% }); %>
+            </ul>
+        <% } %>
+</body>
+</html>
